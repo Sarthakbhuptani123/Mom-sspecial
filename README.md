@@ -1,73 +1,90 @@
-# Welcome to your Lovable project
+# 🍱 Mom's Special - Home-Style Tiffin Service
 
-## Project info
+**Mom's Special** is a premium, beautifully designed web application for a local tiffin service in Gandhinagar. It bridges the gap between traditional home-cooked food and modern convenience, offering users an easy way to view menus, calculate costs, and order meals.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🌟 Key Features
 
-## How can I edit this code?
+*   **🎨 Premium Rebranding:** A complete visual identity overhaul to "Mom's Special" with a warm, trustworthy, and appetising design.
+*   **📋 Weekly Menu:** A beautiful, animated tab-based menu for Lunch (Detailed Thali) and Dinner (Light Meals), including special weekend items.
+*   **🚚 Delivery Area Checker:** An interactive tool on the Contact page that instantly tells users if delivery is available in their sector (Sector 6 & 7) or if it's pickup-only.
+*   **🧮 Subscription Cost Calculator:** A smart slider on the Pricing page allowing users to estimate their monthly expenses based on meal type (Basic/Full) and number of days.
+*   **💬 Testimonials:** "Mom's Wall of Love" showcasing authentic reviews to build trust.
+*   **🔔 Floating Trial Button:** A sticky "Book Trial Meal" button that appears on scroll to boost conversions.
+*   **📱 WhatsApp Integration:** Direct "Click-to-Chat" buttons for ordering and inquiries with pre-filled messages.
+*   **📢 Promotional Banner:** A dismissible "Today's Special" notification bar at the top of the site.
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+*   **Frontend:** React.js (Vite)
+*   **Styling:** Tailwind CSS, Shadcn UI
+*   **Animations:** Framer Motion
+*   **Icons:** Lucide React
+*   **Routing:** React Router DOM
+*   **Management:** `npm`, `git`
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🚀 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+Follow these steps to run the project locally on your machine.
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+*   Node.js (v18 or higher)
+*   npm or yarn
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Sarthakbhuptani123/Mom-sspecial.git
+    cd Mom-sspecial
+    ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+4.  **Open your browser:**
+    Navigate to `http://localhost:8080` (or the port shown in your terminal) to view the app.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## 📂 Project Structure
+
+```
+src/
+├── components/         # Reusable UI components (Navbar, Footer, Buttons, etc.)
+│   ├── ui/             # Shadcn UI primitives
+│   ├── CostCalculator.tsx
+│   ├── FloatingTrialButton.tsx
+│   └── Testimonials.tsx
+├── pages/              # Main route pages
+│   ├── Home.tsx        # Hero, Features, Testimonials
+│   ├── Menu.tsx        # Weekly Menu Tables
+│   ├── Pricing.tsx     # Plans & Calculator
+│   ├── Contact.tsx     # Delivery Checker & Info
+│   └── About.tsx       # Brand Story & Values
+├── App.tsx             # Main Application Component
+└── main.tsx            # Entry Point
 ```
 
-**Edit a file directly in GitHub**
+## 📍 Contact & Location
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+*   **Address:** Sector-6A, Block No 431/2, Nr. Ambaji Mata Temple, Gandhinagar.
+*   **Phone:** +91 74360 59291
+*   **Service Areas:**  
+    *   *Lunch Delivery:* Sector 6 & 7  
+    *   *Pickup:* Sector 6A (All meals)
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 👨‍💻 Developed By
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Made with ❤️ towards healthy, home-style food.
