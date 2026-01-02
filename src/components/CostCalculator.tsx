@@ -30,7 +30,7 @@ const CostCalculator = () => {
                         </p>
                     </div>
 
-                    <div className="bg-cream/50 rounded-3xl p-8 md:p-12 shadow-sm border border-border">
+                    <div className="bg-cream/50 rounded-3xl p-6 md:p-12 shadow-sm border border-border">
                         <div className="grid md:grid-cols-2 gap-12 items-center">
 
                             {/* Controls */}

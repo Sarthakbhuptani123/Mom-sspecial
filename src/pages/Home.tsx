@@ -3,6 +3,7 @@ import { Phone, MessageCircle, Utensils, Leaf, Clock, Heart } from "lucide-react
 import { Button } from "@/components/ui/button";
 import heroFood from "@/assets/hero-food.jpg";
 import Testimonials from "@/components/Testimonials";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const whatsappMessage = encodeURIComponent(
@@ -106,19 +107,29 @@ const Home = () => {
       {/* Why Choose Us */}
       <section className="py-20 md:py-28 bg-cream">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <span className="text-primary font-medium">Why Choose Us</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
               The Mom's Special Difference
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <div
+              <motion.div
                 key={benefit.title}
-                className="bg-background p-8 rounded-2xl shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1 text-center group"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-background p-8 rounded-2xl shadow-card hover:shadow-soft transition-all duration-300 text-center group"
               >
                 <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center text-secondary mx-auto mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                   {benefit.icon}
@@ -127,7 +138,7 @@ const Home = () => {
                   {benefit.title}
                 </h3>
                 <p className="text-muted-foreground">{benefit.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -139,17 +150,27 @@ const Home = () => {
       {/* How It Works */}
       <section className="py-20 md:py-28 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <span className="text-primary font-medium">Simple Process</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
               How It Works
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {steps.map((step, index) => (
-              <div
+              <motion.div
                 key={step.number}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
                 className="relative text-center p-6"
               >
                 <div className="text-6xl font-bold text-primary/10 mb-4">
@@ -162,7 +183,7 @@ const Home = () => {
                 {index < steps.length - 1 && (
                   <div className="hidden md:block absolute top-1/4 right-0 translate-x-1/2 w-8 h-0.5 bg-primary/30" />
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -176,7 +197,13 @@ const Home = () => {
 
       {/* CTA Section */}
       <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="container mx-auto px-4 text-center"
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
             Ready to Taste Home-Style Goodness?
           </h2>
@@ -199,7 +226,7 @@ const Home = () => {
               <Link to="/menu">View Our Menu</Link>
             </Button>
           </div>
-        </div>
+        </motion.div>
       </section>
     </>
   );

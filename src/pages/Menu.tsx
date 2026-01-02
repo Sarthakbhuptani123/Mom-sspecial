@@ -147,11 +147,11 @@ const Menu = () => {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-muted/30 text-muted-foreground border-b border-border">
-                        <th className="p-5 font-bold uppercase text-xs tracking-wider">Day</th>
-                        <th className="p-5 font-bold uppercase text-xs tracking-wider text-center">Roti (Daily)</th>
-                        <th className="p-5 font-bold uppercase text-xs tracking-wider">Sabji</th>
-                        <th className="p-5 font-bold uppercase text-xs tracking-wider">Dal</th>
-                        <th className="p-5 font-bold uppercase text-xs tracking-wider text-center">Rice</th>
+                        <th className="p-3 md:p-5 font-bold uppercase text-xs tracking-wider">Day</th>
+                        <th className="p-3 md:p-5 font-bold uppercase text-xs tracking-wider text-center">Roti (Daily)</th>
+                        <th className="p-3 md:p-5 font-bold uppercase text-xs tracking-wider">Sabji</th>
+                        <th className="p-3 md:p-5 font-bold uppercase text-xs tracking-wider">Dal</th>
+                        <th className="p-3 md:p-5 font-bold uppercase text-xs tracking-wider text-center">Rice</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border/40">
@@ -161,16 +161,16 @@ const Menu = () => {
                           whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }}
                           className="transition-colors hover:bg-muted/20"
                         >
-                          <td className="p-5 font-semibold text-primary">{dayItem.day}</td>
-                          <td className="p-5 text-center px-4">
-                            <span className={`inline-flex items-center justify-center ${dayItem.roti.length > 2 ? 'px-3 py-1 rounded-full text-xs font-medium w-auto' : 'w-8 h-8 rounded-full text-xs'} bg-green-100 text-green-700 shadow-sm`}>
+                          <td className="p-3 md:p-5 font-semibold text-primary text-sm md:text-base">{dayItem.day}</td>
+                          <td className="p-3 md:p-5 text-center px-2 md:px-4">
+                            <span className={`inline-flex items-center justify-center ${dayItem.roti.length > 2 ? 'px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-medium w-auto' : 'w-6 h-6 md:w-8 md:h-8 rounded-full text-[10px] md:text-xs'} bg-green-100 text-green-700 shadow-sm`}>
                               {dayItem.roti}
                             </span>
                           </td>
-                          <td className="p-5 font-medium">{dayItem.sabji}</td>
-                          <td className="p-5 text-balance">{dayItem.dal}</td>
-                          <td className="p-5 text-center px-4">
-                            <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-700 text-xs shadow-sm">
+                          <td className="p-3 md:p-5 font-medium text-sm md:text-base">{dayItem.sabji}</td>
+                          <td className="p-3 md:p-5 text-balance text-sm md:text-base">{dayItem.dal}</td>
+                          <td className="p-3 md:p-5 text-center px-2 md:px-4">
+                            <div className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-green-100 text-green-700 text-[10px] md:text-xs shadow-sm">
                               {dayItem.rice}
                             </div>
                           </td>

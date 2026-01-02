@@ -59,7 +59,7 @@ const About = () => {
               <span className="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">
                 Welcome to our Family
               </span>
-              <h1 className="text-5xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight">
+              <h1 className="text-4xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight">
                 Where Every Meal <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-600">
                   Feels Like Home
