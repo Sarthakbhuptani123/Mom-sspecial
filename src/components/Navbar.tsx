@@ -57,8 +57,8 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || !showBanner
           ? "top-0"
           : showBanner ? "top-[36px]" : "top-0"
-          } ${isScrolled
-            ? "bg-background/95 backdrop-blur-md shadow-card"
+          } ${isScrolled || isOpen
+            ? "bg-background shadow-md"
             : "bg-transparent"
           }`}
         style={{
@@ -113,35 +113,36 @@ const Navbar = () => {
 
           {/* Mobile Menu */}
           <div
-            className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 pb-6" : "max-h-0"
+            className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
               }`}
           >
-            <div className="flex flex-col gap-4 pt-4">
+            <div className="flex flex-col gap-4 py-6 px-2 bg-background/95 backdrop-blur-sm rounded-b-2xl shadow-xl border-t border-border/50">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-base font-medium transition-colors hover:text-primary ${location.pathname === link.path
-                    ? "text-primary"
+                  onClick={() => setIsOpen(false)}
+                  className={`text-lg font-medium py-2 px-4 rounded-lg transition-colors hover:bg-accent ${location.pathname === link.path
+                    ? "text-primary bg-primary/10"
                     : "text-foreground/80"
                     }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <Button variant="whatsapp" asChild>
+              <div className="flex flex-col gap-3 pt-4 border-t border-border mt-2">
+                <Button variant="whatsapp" className="w-full justify-center" asChild>
                   <a
                     href="https://wa.me/917436059291?text=Hello,%20I%20am%20interested%20in%20your%20tiffin%20service.%0AArea:%0AMeal%20type:"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    WhatsApp Us
+                    <span className="mr-2">💬</span> WhatsApp Us
                   </a>
                 </Button>
-                <Button variant="phone" asChild>
+                <Button variant="default" className="w-full justify-center bg-primary text-primary-foreground hover:bg-primary/90" asChild>
                   <a href="tel:+917436059291">
-                    <Phone className="w-4 h-4" />
+                    <Phone className="w-4 h-4 mr-2" />
                     Call Now
                   </a>
                 </Button>
