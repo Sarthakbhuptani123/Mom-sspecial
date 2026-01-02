@@ -219,7 +219,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground">Main Kitchen & Self-Service Pickup Point</p>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-foreground">Delivery Areas (Lunch Only):</p>
+                  <p className="text-sm font-semibold text-foreground">Delivery Areas (Dinner Only):</p>
                   <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
                     <li>Sector 6</li>
                     <li>Sector 7</li>
