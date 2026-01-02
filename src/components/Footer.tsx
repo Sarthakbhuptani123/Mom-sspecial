@@ -85,7 +85,7 @@ const Footer = () => {
 
         <div className="border-t border-cream/20 mt-10 pt-6 text-center">
           <p className="text-cream/60 text-sm">
-            © {new Date().getFullYear()} Mom's Special. Made with ❤️ for homestyle food lovers.
+            © {new Date().getFullYear()} Mom's Special. Made with ❤️ by Sarthak for homestyle food lovers.
           </p>
         </div>
       </div>

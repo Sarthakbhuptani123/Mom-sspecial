@@ -87,4 +87,4 @@ src/
 
 ### 👨‍💻 Developed By
 
-Made with ❤️ towards healthy, home-style food.
+Made with ❤️ by Sarthak towards healthy, home-style food.
