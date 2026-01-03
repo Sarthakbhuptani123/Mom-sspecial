@@ -163,14 +163,14 @@ const Menu = () => {
                         >
                           <td className="p-3 md:p-5 font-semibold text-primary text-sm md:text-base">{dayItem.day}</td>
                           <td className="p-3 md:p-5 text-center px-2 md:px-4">
-                            <span className={`inline-flex items-center justify-center ${dayItem.roti.length > 2 ? 'px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-medium w-auto' : 'w-6 h-6 md:w-8 md:h-8 rounded-full text-[10px] md:text-xs'} bg-green-100 text-green-700 shadow-sm`}>
+                            <span className={`inline-flex items-center justify-center ${dayItem.roti.length > 2 ? 'px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-medium w-auto' : 'w-6 h-6 md:w-8 md:h-8 rounded-full text-[10px] md:text-xs'} bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400 shadow-sm`}>
                               {dayItem.roti}
                             </span>
                           </td>
                           <td className="p-3 md:p-5 font-medium text-sm md:text-base">{dayItem.sabji}</td>
                           <td className="p-3 md:p-5 text-balance text-sm md:text-base">{dayItem.dal}</td>
                           <td className="p-3 md:p-5 text-center px-2 md:px-4">
-                            <div className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-green-100 text-green-700 text-[10px] md:text-xs shadow-sm">
+                            <div className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400 text-[10px] md:text-xs shadow-sm">
                               {dayItem.rice}
                             </div>
                           </td>
@@ -227,7 +227,7 @@ const Menu = () => {
                           >
                             <td className="p-4 font-semibold text-secondary">{dayItem.day}</td>
                             <td className="p-4 text-center">
-                              <span className={`inline-flex items-center justify-center ${dayItem.roti.length > 2 ? 'px-2 py-1 rounded-full text-[10px] font-medium w-auto' : 'w-6 h-6 rounded-full text-[10px]'} bg-orange-100 text-orange-700 shadow-sm`}>
+                              <span className={`inline-flex items-center justify-center ${dayItem.roti.length > 2 ? 'px-2 py-1 rounded-full text-[10px] font-medium w-auto' : 'w-6 h-6 rounded-full text-[10px]'} bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-400 shadow-sm`}>
                                 {dayItem.roti}
                               </span>
                             </td>
@@ -251,7 +251,7 @@ const Menu = () => {
                         <div className="p-2.5 bg-white dark:bg-card rounded-lg shadow-sm ring-1 ring-border">
                           <span className="text-2xl">🌟</span>
                         </div>
-                        <h2 className="text-xl font-bold text-green-700">OPTIONAL ITEMS</h2>
+                        <h2 className="text-xl font-bold text-green-700 dark:text-green-400">OPTIONAL ITEMS</h2>
                       </div>
                     </div>
                     <div className="overflow-x-auto">
@@ -269,7 +269,7 @@ const Menu = () => {
                               className="transition-colors hover:bg-muted/20"
                             >
                               <td className="p-4 text-center">
-                                <span className={`inline-flex items-center justify-center ${optItem.roti.length > 2 ? 'px-2 py-1 rounded-full text-[10px] font-medium w-auto' : 'w-6 h-6 rounded-full text-[10px]'} bg-green-100 text-green-700 shadow-sm`}>
+                                <span className={`inline-flex items-center justify-center ${optItem.roti.length > 2 ? 'px-2 py-1 rounded-full text-[10px] font-medium w-auto' : 'w-6 h-6 rounded-full text-[10px]'} bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400 shadow-sm`}>
                                   {optItem.roti}
                                 </span>
                               </td>

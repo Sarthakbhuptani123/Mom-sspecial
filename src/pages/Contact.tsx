@@ -80,14 +80,14 @@ const Contact = () => {
       </Helmet>
 
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-cream">
+      <section className="pt-28 md:pt-32 pb-12 md:pb-16 bg-muted/30 dark:bg-muted/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <span className="text-primary font-medium">Contact Us</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground mt-2 mb-4 md:mb-6">
               Get in Touch
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               Visit us at Sector-6A, Block No 431/2, Nr. Ambaji Mata Temple, Gandhinagar.
             </p>
           </div>
@@ -95,23 +95,23 @@ const Contact = () => {
       </section>
 
       {/* Delivery Check Tool */}
-      <section className="py-12 bg-white border-b border-border">
+      <section className="py-8 md:py-12 bg-background border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto bg-accent/30 p-8 rounded-2xl border border-accent">
-            <h3 className="text-2xl font-bold text-center mb-6 text-foreground">
+          <div className="max-w-xl mx-auto bg-accent/30 p-6 md:p-8 rounded-2xl border border-accent">
+            <h3 className="text-xl md:text-2xl font-bold text-center mb-6 text-foreground">
               Check Delivery Availability 🚚
             </h3>
             <div className="flex flex-col gap-4">
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   placeholder="Enter your Sector (e.g., Sector 6)"
-                  className="flex-1 px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="flex-1 px-4 py-3 rounded-xl border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   value={areaInput}
                   onChange={(e) => setAreaInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAreaCheck()}
                 />
-                <Button onClick={handleAreaCheck} className="px-6">
+                <Button onClick={handleAreaCheck} className="px-6 w-full sm:w-auto mt-2 sm:mt-0">
                   <Search className="w-4 h-4 mr-2" /> Check
                 </Button>
               </div>
@@ -119,8 +119,8 @@ const Contact = () => {
               {checkResult && (
                 <div
                   className={`p-4 rounded-xl flex items-start gap-3 text-sm font-medium animate-fade-in ${checkResult.allowed
-                    ? "bg-green-100 text-green-800 border border-green-200"
-                    : "bg-red-100 text-red-800 border border-red-200"
+                    ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800"
+                    : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800"
                     }`}
                 >
                   {checkResult.allowed ? (
@@ -140,13 +140,13 @@ const Contact = () => {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-16 bg-background">
+      <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
             {contactMethods.map((method) => (
               <div
                 key={method.title}
-                className="bg-card p-8 rounded-2xl shadow-card text-center hover:shadow-soft transition-all duration-300"
+                className="bg-card p-6 md:p-8 rounded-2xl shadow-card text-center hover:shadow-soft transition-all duration-300 border border-border"
               >
                 <div className="w-16 h-16 bg-accent rounded-xl flex items-center justify-center text-secondary mx-auto mb-6">
                   {method.icon}
@@ -157,7 +157,11 @@ const Contact = () => {
                 <p className="text-muted-foreground mb-6">
                   {method.description}
                 </p>
-                <Button variant={method.buttonVariant} size="lg" asChild>
+                <Button
+                  variant={method.buttonVariant}
+                  className="w-full whitespace-normal h-auto py-3 text-sm md:text-base"
+                  asChild
+                >
                   <a
                     href={method.action}
                     target={method.title === "WhatsApp" ? "_blank" : undefined}
@@ -172,24 +176,25 @@ const Contact = () => {
           </div>
 
           {/* WhatsApp Group QR Code Section */}
-          <div className="max-w-2xl mx-auto mt-12 p-8 bg-card rounded-2xl shadow-card text-center border border-border">
+          <div className="max-w-2xl mx-auto mt-12 p-6 md:p-8 bg-card rounded-2xl shadow-card text-center border border-border">
             <div className="flex flex-col items-center gap-6">
               <MessageCircle className="w-12 h-12 text-primary" />
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">Join our WhatsApp Community</h3>
-                <p className="text-muted-foreground">Scan the QR code to join our group for daily menu updates!</p>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">Join our WhatsApp Community</h3>
+                <p className="text-muted-foreground text-sm md:text-base">Scan the QR code to join our group for daily menu updates!</p>
               </div>
 
-              <div className="p-4 bg-white rounded-xl shadow-lg border border-border inline-block">
+              <div className="p-4 bg-white rounded-xl shadow-lg border border-border inline-block max-w-full">
                 <QRCodeSVG
                   value={whatsappGroupUrl}
                   size={200}
+                  className="max-w-full h-auto"
                   level="H"
                   includeMargin={true}
                 />
               </div>
 
-              <Button className="bg-[#25D366] hover:bg-[#1fb855] text-white" size="lg" asChild>
+              <Button className="bg-[#25D366] hover:bg-[#1fb855] text-white w-full sm:w-auto" size="lg" asChild>
                 <a href={whatsappGroupUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Join Group via Link
@@ -201,11 +206,11 @@ const Contact = () => {
       </section>
 
       {/* Info Section */}
-      <section className="py-16 bg-cream">
+      <section className="py-12 md:py-16 bg-muted/30 dark:bg-muted/10">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
             {/* Service Locations */}
-            <div className="bg-background p-8 rounded-2xl shadow-card">
+            <div className="bg-card p-6 md:p-8 rounded-2xl shadow-card border border-border">
               <div className="flex items-center gap-3 mb-6">
                 <MapPin className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-bold text-foreground">
@@ -224,7 +229,7 @@ const Contact = () => {
                     <li>Sector 6</li>
                     <li>Sector 7</li>
                   </ul>
-                  <p className="text-xs text-orange-600 mt-2 font-medium">
+                  <p className="text-xs text-orange-600 dark:text-orange-400 mt-2 font-medium">
                     * Other areas: Self-service pickup only.
                   </p>
                 </div>
@@ -232,7 +237,7 @@ const Contact = () => {
             </div>
 
             {/* Service Hours */}
-            <div className="bg-background p-8 rounded-2xl shadow-card">
+            <div className="bg-card p-6 md:p-8 rounded-2xl shadow-card border border-border">
               <div className="flex items-center gap-3 mb-6">
                 <Clock className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-bold text-foreground">
@@ -265,16 +270,16 @@ const Contact = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 gradient-hero">
+      <section className="py-12 md:py-16 gradient-hero">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-primary-foreground mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-6">
             Ready to Order?
           </h2>
-          <p className="text-lg text-primary-foreground/90 mb-8 max-w-xl mx-auto">
+          <p className="text-base md:text-lg text-primary-foreground/90 mb-8 max-w-xl mx-auto">
             Visit us at Sector 6A or order lunch delivery in Sector 6 & 7.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="heroOutline" size="xl" asChild>
+            <Button variant="heroOutline" size="xl" className="w-full sm:w-auto" asChild>
               <a href="tel:+917436059291">
                 <Phone className="w-5 h-5" />
                 Call Now
@@ -282,7 +287,7 @@ const Contact = () => {
             </Button>
             <Button
               size="xl"
-              className="bg-[#25D366] hover:bg-[#1fb855] text-primary-foreground"
+              className="bg-[#25D366] hover:bg-[#1fb855] text-primary-foreground w-full sm:w-auto"
               asChild
             >
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

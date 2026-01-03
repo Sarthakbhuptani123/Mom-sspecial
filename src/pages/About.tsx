@@ -41,7 +41,7 @@ const About = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-cream to-orange-50 relative overflow-hidden">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-cream to-orange-50 dark:from-background dark:to-muted relative overflow-hidden">
         {/* Decorative Circles */}
         <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
@@ -74,7 +74,7 @@ const About = () => {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-24 bg-white relative">
+      <section className="py-24 bg-background relative">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -96,7 +96,7 @@ const About = () => {
                 <p>
                   Our recipes are family heirlooms, passed down through generations. We don't use readymade purees or artificial preservatives. Each curry is cooked slowly to let the flavors marry, each roti is puffed to perfection on the tavva.
                 </p>
-                <div className="p-6 bg-cream rounded-xl border-l-4 border-primary italic text-foreground font-medium">
+                <div className="p-6 bg-accent/20 rounded-xl border-l-4 border-primary italic text-foreground font-medium">
                   "We don't serve anything we wouldn't serve to our own children."
                 </div>
               </div>
@@ -109,7 +109,7 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-100 to-yellow-50 flex items-center justify-center p-10 relative">
+              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-100 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/10 flex items-center justify-center p-10 relative">
                 <div className="absolute inset-0 pattern-grid opacity-10"></div>
                 <div className="text-center">
                   <span className="text-9xl mb-4 block">👩‍🍳</span>
@@ -117,20 +117,13 @@ const About = () => {
                   <p className="text-muted-foreground mt-2">Crafted by moms, for you.</p>
                 </div>
               </div>
-              {/* Floating Badge */}
-              {/* <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-10 -left-10 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-gray-100"
-              >
-              </motion.div> */}
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <span className="text-primary font-medium tracking-wide">WHY CHOOSE US</span>
@@ -151,9 +144,9 @@ const About = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -10 }}
-                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="bg-card p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-border"
               >
-                <div className="mb-6 bg-gray-50 w-16 h-16 rounded-2xl flex items-center justify-center">
+                <div className="mb-6 bg-accent/20 w-16 h-16 rounded-2xl flex items-center justify-center">
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">{value.title}</h3>

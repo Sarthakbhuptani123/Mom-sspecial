@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import heroFood from "@/assets/hero-food.jpg";
 import Testimonials from "@/components/Testimonials";
 import { motion } from "framer-motion";
+import TodaysMenu from "@/components/TodaysMenu";
+
+import heroFoodDark from "@/assets/hero-food-dark.png";
 
 const Home = () => {
   const whatsappMessage = encodeURIComponent(
@@ -56,27 +59,35 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image - Light Mode */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat dark:hidden"
           style={{ backgroundImage: `url(${heroFood})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-warm-brown/90 via-warm-brown/70 to-warm-brown/50" />
         </div>
 
+        {/* Background Image - Dark Mode */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden dark:block"
+          style={{ backgroundImage: `url(${heroFoodDark})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
+        </div>
+
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 pt-20">
+        <div className="relative z-10 container mx-auto px-4 pt-20 pb-24 md:pb-32">
           <div className="max-w-2xl">
             <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-medium mb-6 animate-fade-in">
               🍱 Local Tiffin Service
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cream mb-6 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
               Home-Style <span className="text-primary">Healthy Food</span>
             </h1>
-            <p className="text-lg md:text-xl text-cream/90 mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <p className="text-lg md:text-xl text-white/90 mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               Experience the authentic taste of Ghar ka Khana. Pure, hygienic, and prepared with a mother's love.
             </p>
-            <p className="text-base text-cream/70 mb-8 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+            <p className="text-base text-white/70 mb-8 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
               📍 Serving Gandhinagar Sector 6, 7 & 6A • 100% Pure Veg
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
@@ -103,6 +114,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Today's Special Menu Widget */}
+      <TodaysMenu />
 
       {/* Why Choose Us */}
       <section className="py-20 md:py-28 bg-cream">

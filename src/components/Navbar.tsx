@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -93,6 +94,7 @@ const Navbar = () => {
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
+              <ModeToggle />
               <Button variant="outline" size="sm" asChild>
                 <a href="tel:+917436059291">
                   <Phone className="w-4 h-4" />
@@ -102,13 +104,16 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 text-foreground"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            <div className="flex md:hidden items-center gap-2">
+              <ModeToggle />
+              <button
+                className="p-2 text-foreground"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
