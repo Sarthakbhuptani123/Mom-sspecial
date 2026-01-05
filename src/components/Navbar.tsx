@@ -4,6 +4,7 @@ import { Menu, X, Phone, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { ModeToggle } from "@/components/mode-toggle";
+import { lunchMenu, dinnerMenu } from "@/data/menuData";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -18,6 +19,11 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
   const location = useLocation();
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const today = days[new Date().getDay()];
+  const todaysLunch = lunchMenu.find((m) => m.day === today);
+  const todaysDinner = dinnerMenu.find((m) => m.day === today);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +48,7 @@ const Navbar = () => {
             className="bg-primary text-primary-foreground text-center text-sm font-medium py-2 px-4 relative z-[60]"
           >
             <span>
-              🎉 Today's Special: <strong>Gajar ka Halwa</strong> included with all Dinner orders! 🥕
+              🎉 Today's Special: <strong>{todaysLunch?.sabji}</strong> (Lunch) & <strong>{todaysDinner?.sabji}</strong> (Dinner)
             </span>
             <button
               onClick={() => setShowBanner(false)}
