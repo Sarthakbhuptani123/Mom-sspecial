@@ -24,18 +24,27 @@ const DINNER_MENU = {
     Sunday: { roti: "✔️", sabji: "Sev Tameta" },
 };
 
+import { API_URL } from "@/config";
+
 const TodaysMenu = () => {
     const [currentDay, setCurrentDay] = useState<string>("");
+    const [menuData, setMenuData] = useState<any>(null);
 
     useEffect(() => {
         const day = new Date().toLocaleDateString("en-US", { weekday: "long" });
         setCurrentDay(day);
+
+        // Fetch dynamic menu
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => setMenuData(data))
+            .catch(err => console.log("Using static data"));
     }, []);
 
     if (!currentDay) return null;
 
-    const todayLunch = LUNCH_MENU[currentDay as keyof typeof LUNCH_MENU];
-    const todayDinner = DINNER_MENU[currentDay as keyof typeof DINNER_MENU];
+    const todayLunch = menuData?.lunch?.find((d: any) => d.day === currentDay) || LUNCH_MENU[currentDay as keyof typeof LUNCH_MENU];
+    const todayDinner = menuData?.dinner?.find((d: any) => d.day === currentDay) || DINNER_MENU[currentDay as keyof typeof DINNER_MENU];
 
     const container = {
         hidden: { opacity: 0 },

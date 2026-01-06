@@ -1,9 +1,28 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Leaf, Clock, Info, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { lunchMenu, dinnerMenu, optionalItems } from "@/data/menuData";
+import { lunchMenu as staticLunch, dinnerMenu as staticDinner, optionalItems as staticOptional } from "@/data/menuData";
+
+import { API_URL } from "@/config";
 
 const Menu = () => {
+  const [lunchMenu, setLunchMenu] = useState(staticLunch);
+  const [dinnerMenu, setDinnerMenu] = useState(staticDinner);
+  const [optionalItems, setOptionalItems] = useState(staticOptional);
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          if (data.lunch) setLunchMenu(data.lunch);
+          if (data.dinner) setDinnerMenu(data.dinner);
+          if (data.optional) setOptionalItems(data.optional);
+        }
+      })
+      .catch(err => console.log("Using static menu data"));
+  }, []);
 
 
   const container = {
