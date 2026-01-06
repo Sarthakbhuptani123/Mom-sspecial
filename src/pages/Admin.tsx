@@ -157,7 +157,7 @@ const Admin = () => {
                         <h2 className="text-2xl font-bold text-primary">Lunch Menu</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {menuData.lunch.map((item: any, index: number) => (
+                        {menuData.lunch && Array.isArray(menuData.lunch) && menuData.lunch.map((item: any, index: number) => (
                             <div key={index} className="bg-card p-5 rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
                                 <div className="font-bold text-lg mb-4 text-foreground border-b border-border pb-2 flex justify-between items-center">
                                     {item.day}
@@ -211,7 +211,7 @@ const Admin = () => {
                         <h2 className="text-2xl font-bold text-secondary">Dinner Menu</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {menuData.dinner.map((item: any, index: number) => (
+                        {menuData.dinner && Array.isArray(menuData.dinner) && menuData.dinner.map((item: any, index: number) => (
                             <div key={index} className="bg-card p-5 rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
                                 <div className="font-bold text-lg mb-4 text-foreground border-b border-border pb-2 flex justify-between items-center">
                                     {item.day}

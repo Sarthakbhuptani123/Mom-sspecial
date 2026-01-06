@@ -13,12 +13,15 @@ const Menu = () => {
 
   useEffect(() => {
     fetch(API_URL)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch");
+        return res.json();
+      })
       .then(data => {
-        if (data) {
-          if (data.lunch) setLunchMenu(data.lunch);
-          if (data.dinner) setDinnerMenu(data.dinner);
-          if (data.optional) setOptionalItems(data.optional);
+        if (data && !data.error) {
+          if (Array.isArray(data.lunch)) setLunchMenu(data.lunch);
+          if (Array.isArray(data.dinner)) setDinnerMenu(data.dinner);
+          if (Array.isArray(data.optional)) setOptionalItems(data.optional);
         }
       })
       .catch(err => console.log("Using static menu data"));
@@ -107,7 +110,7 @@ const Menu = () => {
 
             {/* Mobile View: Combined Daily Cards */}
             <div className="md:hidden space-y-6">
-              {lunchMenu.map((lunchItem, index) => {
+              {lunchMenu && Array.isArray(lunchMenu) ? lunchMenu.map((lunchItem, index) => {
                 const dinnerItem = dinnerMenu.find(d => d.day === lunchItem.day);
                 return (
                   <motion.div
@@ -174,7 +177,7 @@ const Menu = () => {
                     </div>
                   </motion.div>
                 );
-              })}
+              }) : <p className="text-center py-4">Menu loading...</p>}
             </div>
 
             {/* Desktop View: Lunch Menu Table */}
@@ -310,7 +313,7 @@ const Menu = () => {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-border/40">
-                        {dinnerMenu.map((dayItem, index) => (
+                        {dinnerMenu && Array.isArray(dinnerMenu) ? dinnerMenu.map((dayItem, index) => (
                           <motion.tr
                             key={index}
                             className="transition-colors hover:bg-muted/20"
@@ -323,7 +326,7 @@ const Menu = () => {
                             </td>
                             <td className="p-4 font-medium">{dayItem.sabji}</td>
                           </motion.tr>
-                        ))}
+                        )) : <tr><td colSpan={3} className="p-4 text-center">No dinner data available.</td></tr>}
                       </tbody>
                     </table>
                   </div>
@@ -370,7 +373,7 @@ const Menu = () => {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-border/40">
-                          {optionalItems.map((optItem, index) => (
+                          {optionalItems && Array.isArray(optionalItems) ? optionalItems.map((optItem, index) => (
                             <motion.tr
                               key={index}
                               className="transition-colors hover:bg-muted/20"
@@ -382,7 +385,7 @@ const Menu = () => {
                               </td>
                               <td className="p-4 font-medium text-foreground">{optItem.sabji}</td>
                             </motion.tr>
-                          ))}
+                          )) : <tr><td colSpan={2} className="p-4 text-center">No optional items data.</td></tr>}
                         </tbody>
                       </table>
                     </div>
