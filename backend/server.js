@@ -65,6 +65,17 @@ app.get('/api/menu', async (req, res) => {
     }
 });
 
+// Verify Password Route
+app.post('/api/verify', (req, res) => {
+    const { password } = req.body;
+
+    if (password === process.env.ADMIN_PASSWORD) {
+        return res.json({ success: true });
+    } else {
+        return res.status(401).json({ success: false, message: "Invalid Password" });
+    }
+});
+
 // UPDATE Menu (Protected by simple password in body for simplicity as requested "simple")
 app.put('/api/menu', async (req, res) => {
     const { password, lunch, dinner, optional } = req.body;

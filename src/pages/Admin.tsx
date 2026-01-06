@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Loader2, Save, Lock } from "lucide-react";
+import { Loader2, Save, Lock, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { API_URL } from "@/config";
@@ -13,13 +13,33 @@ const Admin = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [menuData, setMenuData] = useState<any>(null);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        setPassword("");
+        setMenuData(null);
+        toast.info("Logged out");
+    };
+
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === "momspecial123") { // Matches the simple backend check
-            setIsAuthenticated(true);
-            fetchMenu();
-        } else {
-            toast.error("Invalid Password");
+        setIsLoading(true);
+        try {
+            const res = await fetch(`${API_URL.replace('/menu', '')}/verify`, { // Hack to get base URL
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password }),
+            });
+
+            if (res.ok) {
+                setIsAuthenticated(true);
+                fetchMenu();
+            } else {
+                toast.error("Invalid Password");
+            }
+        } catch (error) {
+            toast.error("Connection failed. Ensure backend is running.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -112,55 +132,71 @@ const Admin = () => {
     );
 
     return (
-        <div className="min-h-screen bg-muted/10 pb-20">
-            <header className="bg-card border-b border-border sticky top-0 z-10 px-4 py-4 shadow-sm">
+        <div className="min-h-screen bg-muted/10 pb-40 pt-20 md:pt-24">
+            <header className="bg-card border-b border-border sticky top-16 md:top-20 z-40 px-4 py-4 shadow-sm transition-all">
                 <div className="container mx-auto flex justify-between items-center">
                     <h1 className="text-xl font-bold">🍱 Menu Manager</h1>
-                    <Button onClick={handleSave} disabled={isLoading} className="gap-2">
-                        {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                        Save Changes
-                    </Button>
+                    <div className="flex items-center gap-2">
+                        <Button variant="ghost" size="sm" onClick={handleLogout} className="text-muted-foreground hover:text-destructive gap-2">
+                            <LogOut className="w-4 h-4" />
+                            <span className="hidden sm:inline">Logout</span>
+                        </Button>
+                        <Button onClick={handleSave} disabled={isLoading} className="gap-2">
+                            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                            Save Changes
+                        </Button>
+                    </div>
                 </div>
             </header>
 
             <div className="container mx-auto px-4 py-8 max-w-5xl space-y-12">
                 {/* Lunch Section */}
                 <section>
-                    <h2 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
-                        🥗 Lunch Menu
-                    </h2>
-                    <div className="grid gap-6">
+                    <div className="flex items-center gap-3 mb-6 bg-primary/10 p-4 rounded-xl inline-block">
+                        <span className="text-3xl">🥗</span>
+                        <h2 className="text-2xl font-bold text-primary">Lunch Menu</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {menuData.lunch.map((item: any, index: number) => (
-                            <div key={index} className="bg-card p-6 rounded-xl border border-border shadow-sm">
-                                <div className="font-bold text-lg mb-4 text-muted-foreground">{item.day}</div>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground">Sabji</label>
+                            <div key={index} className="bg-card p-5 rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
+                                <div className="font-bold text-lg mb-4 text-foreground border-b border-border pb-2 flex justify-between items-center">
+                                    {item.day}
+                                    <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Lunch</span>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold uppercase text-muted-foreground">Sabji</label>
                                         <Input
                                             value={item.sabji}
                                             onChange={(e) => updateLunch(index, 'sabji', e.target.value)}
+                                            className="h-9"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground">Dal</label>
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold uppercase text-muted-foreground">Dal</label>
                                         <Input
                                             value={item.dal}
                                             onChange={(e) => updateLunch(index, 'dal', e.target.value)}
+                                            className="h-9"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground">Roti</label>
-                                        <Input
-                                            value={item.roti}
-                                            onChange={(e) => updateLunch(index, 'roti', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground">Rice</label>
-                                        <Input
-                                            value={item.rice}
-                                            onChange={(e) => updateLunch(index, 'rice', e.target.value)}
-                                        />
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-bold uppercase text-muted-foreground">Roti</label>
+                                            <Input
+                                                value={item.roti}
+                                                onChange={(e) => updateLunch(index, 'roti', e.target.value)}
+                                                className="h-9"
+                                            />
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-bold uppercase text-muted-foreground">Rice</label>
+                                            <Input
+                                                value={item.rice}
+                                                onChange={(e) => updateLunch(index, 'rice', e.target.value)}
+                                                className="h-9"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,26 +206,32 @@ const Admin = () => {
 
                 {/* Dinner Section */}
                 <section>
-                    <h2 className="text-2xl font-bold mb-6 text-secondary flex items-center gap-2">
-                        🍽️ Dinner Menu
-                    </h2>
-                    <div className="grid gap-6">
+                    <div className="flex items-center gap-3 mb-6 bg-secondary/10 p-4 rounded-xl inline-block">
+                        <span className="text-3xl">🍽️</span>
+                        <h2 className="text-2xl font-bold text-secondary">Dinner Menu</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {menuData.dinner.map((item: any, index: number) => (
-                            <div key={index} className="bg-card p-6 rounded-xl border border-border shadow-sm">
-                                <div className="font-bold text-lg mb-4 text-muted-foreground">{item.day}</div>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground">Sabji</label>
+                            <div key={index} className="bg-card p-5 rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
+                                <div className="font-bold text-lg mb-4 text-foreground border-b border-border pb-2 flex justify-between items-center">
+                                    {item.day}
+                                    <span className="text-xs bg-secondary/10 text-secondary px-2 py-1 rounded">Dinner</span>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold uppercase text-muted-foreground">Sabji</label>
                                         <Input
                                             value={item.sabji}
                                             onChange={(e) => updateDinner(index, 'sabji', e.target.value)}
+                                            className="h-9"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-semibold uppercase text-muted-foreground">Roti</label>
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold uppercase text-muted-foreground">Roti</label>
                                         <Input
                                             value={item.roti}
                                             onChange={(e) => updateDinner(index, 'roti', e.target.value)}
+                                            className="h-9"
                                         />
                                     </div>
                                 </div>

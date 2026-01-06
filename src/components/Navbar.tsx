@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Menu", path: "/menu" },
   { name: "Pricing", path: "/pricing" },
   { name: "Contact", path: "/contact" },
+  { name: "Admin", path: "/admin" },
 ];
 
 const Navbar = () => {
@@ -167,8 +168,8 @@ const Navbar = () => {
                         to={link.path}
                         onClick={() => setIsOpen(false)}
                         className={`text-lg font-medium px-4 py-3 rounded-xl transition-all ${location.pathname === link.path
-                            ? "bg-primary/10 text-primary translate-x-2"
-                            : "text-foreground/80 hover:bg-accent hover:text-foreground hover:translate-x-1"
+                          ? "bg-primary/10 text-primary translate-x-2"
+                          : "text-foreground/80 hover:bg-accent hover:text-foreground hover:translate-x-1"
                           }`}
                       >
                         {link.name}
