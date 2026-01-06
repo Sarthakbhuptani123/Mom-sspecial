@@ -109,57 +109,91 @@ const Navbar = () => {
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex md:hidden items-center gap-2">
+            {/* Mobile Actions & Menu Toggle */}
+            <div className="flex md:hidden items-center gap-3">
+              <a
+                href="tel:+917436059291"
+                className="p-2 text-primary bg-primary/10 rounded-full hover:bg-primary/20 transition-colors"
+                aria-label="Call Now"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
               <ModeToggle />
               <button
-                className="p-2 text-foreground"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
+                className="p-2 text-foreground hover:bg-accent rounded-full transition-colors"
+                onClick={() => setIsOpen(true)}
+                aria-label="Open menu"
               >
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
 
-          {/* Mobile Menu */}
-          <div
-            className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-              }`}
-          >
-            <div className="flex flex-col gap-4 py-6 px-2 bg-background/95 backdrop-blur-sm rounded-b-2xl shadow-xl border-t border-border/50">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
+          {/* Mobile Menu - Side Drawer */}
+          <AnimatePresence>
+            {isOpen && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   onClick={() => setIsOpen(false)}
-                  className={`text-lg font-medium py-2 px-4 rounded-lg transition-colors hover:bg-accent ${location.pathname === link.path
-                    ? "text-primary bg-primary/10"
-                    : "text-foreground/80"
-                    }`}
+                  className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] md:hidden"
+                />
+
+                {/* Drawer */}
+                <motion.div
+                  initial={{ x: "100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "100%" }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                  className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-background border-l border-border shadow-2xl z-[70] md:hidden flex flex-col"
                 >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-3 pt-4 border-t border-border mt-2">
-                <Button variant="whatsapp" className="w-full justify-center" asChild>
-                  <a
-                    href="https://wa.me/917436059291?text=Hello,%20I%20am%20interested%20in%20your%20tiffin%20service.%0AArea:%0AMeal%20type:"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="mr-2">💬</span> WhatsApp Us
-                  </a>
-                </Button>
-                <Button variant="default" className="w-full justify-center bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                  <a href="tel:+917436059291">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Now
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
+                  <div className="flex items-center justify-between p-5 border-b border-border/50">
+                    <span className="text-lg font-bold text-foreground">Menu</span>
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-full transition-colors"
+                    >
+                      <X className="w-6 h-6" />
+                    </button>
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto py-6 px-5 flex flex-col gap-2">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className={`text-lg font-medium px-4 py-3 rounded-xl transition-all ${location.pathname === link.path
+                            ? "bg-primary/10 text-primary translate-x-2"
+                            : "text-foreground/80 hover:bg-accent hover:text-foreground hover:translate-x-1"
+                          }`}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="p-5 border-t border-border/50 bg-muted/20 space-y-3">
+                    <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-2">
+                      <span>Hungry? Order now!</span>
+                    </div>
+                    <Button variant="whatsapp" className="w-full justify-center shadow-sm" asChild>
+                      <a
+                        href="https://wa.me/917436059291?text=Hello,%20I%20am%20interested%20in%20your%20tiffin%20service."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="mr-2">💬</span> WhatsApp Order
+                      </a>
+                    </Button>
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </div>
       </nav>
     </>

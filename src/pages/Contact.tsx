@@ -253,15 +253,15 @@ const Contact = () => {
                 </div>
                 <div className="flex justify-between py-3 border-b border-border">
                   <span className="text-foreground font-medium">
-                    Lunch Delivery
+                    Dinner Delivery
                   </span>
-                  <span className="text-muted-foreground">12:00 PM - 1:30 PM</span>
+                  <span className="text-muted-foreground">7:00 PM - 8:00 PM</span>
                 </div>
                 <div className="flex justify-between py-3">
                   <span className="text-foreground font-medium">
-                    Dinner
+                    Lunch
                   </span>
-                  <span className="text-muted-foreground text-right">Pickup Only<br />(7:00 PM - 9:00 PM)</span>
+                  <span className="text-muted-foreground text-right">Pickup Only<br />(12:00 PM - 1:30 PM)</span>
                 </div>
               </div>
             </div>

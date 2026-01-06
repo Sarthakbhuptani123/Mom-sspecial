@@ -86,8 +86,80 @@ const Menu = () => {
             className="max-w-6xl mx-auto space-y-16"
           >
 
-            {/* Lunch Menu */}
-            <motion.div variants={item} className="relative group">
+            {/* Mobile View: Combined Daily Cards */}
+            <div className="md:hidden space-y-6">
+              {lunchMenu.map((lunchItem, index) => {
+                const dinnerItem = dinnerMenu.find(d => d.day === lunchItem.day);
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm"
+                  >
+                    {/* Card Header (Day) */}
+                    <div className="bg-primary/5 border-b border-border/50 py-2 px-4 flex items-center justify-between">
+                      <span className="font-bold text-lg text-primary">{lunchItem.day}</span>
+                      <div className="flex gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-0.5 rounded">Lunch</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-secondary/10 text-secondary px-2 py-0.5 rounded">Dinner</span>
+                      </div>
+                    </div>
+
+                    {/* Split Layout */}
+                    <div className="flex divide-x divide-border/50">
+                      {/* Left Side: Lunch */}
+                      <div className="flex-1 p-3 space-y-3 bg-gradient-to-b from-primary/5 to-transparent">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sabji</span>
+                          <span className="text-sm font-semibold leading-tight">{lunchItem.sabji}</span>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Dal</span>
+                          <span className="text-sm font-medium leading-tight">{lunchItem.dal}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {lunchItem.roti !== "✔️" && (
+                            <span className="text-[10px] px-1.5 py-0.5 bg-background border border-border rounded text-muted-foreground whitespace-nowrap">
+                              {lunchItem.roti}
+                            </span>
+                          )}
+                          {lunchItem.rice !== "✔️" && lunchItem.rice !== "-" && (
+                            <span className="text-[10px] px-1.5 py-0.5 bg-background border border-border rounded text-muted-foreground whitespace-nowrap">
+                              Rice: {lunchItem.rice}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Right Side: Dinner */}
+                      <div className="flex-1 p-3 space-y-3 bg-gradient-to-b from-secondary/5 to-transparent">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sabji</span>
+                          <span className="text-sm font-semibold leading-tight">{dinnerItem?.sabji || "-"}</span>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Roti</span>
+                          <div className="text-sm font-medium leading-tight">
+                            {dinnerItem?.roti === "✔️" ? (
+                              <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
+                                <CheckCircle2 className="w-3 h-3" /> Standard
+                              </span>
+                            ) : (
+                              <span>{dinnerItem?.roti}</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Desktop View: Lunch Menu Table */}
+            <motion.div variants={item} className="hidden md:block relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-green-400 rounded-3xl opacity-20 group-hover:opacity-40 blur transition duration-500" />
               <div className="relative bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
                 <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-transparent p-6 md:p-8 border-b border-border/60">
@@ -119,7 +191,7 @@ const Menu = () => {
                   </div>
                 </div>
 
-                <div className="overflow-x-auto">
+                <div className="hidden md:block overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-muted/30 text-muted-foreground border-b border-border">
@@ -161,8 +233,8 @@ const Menu = () => {
             {/* Dinner Menu & Optional Items Grid */}
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
 
-              {/* Dinner Menu */}
-              <motion.div variants={item} className="relative group flex flex-col h-full">
+              {/* Desktop View: Dinner Menu Table */}
+              <motion.div variants={item} className="hidden md:flex relative group flex-col h-full">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-secondary to-orange-400 rounded-3xl opacity-20 group-hover:opacity-40 blur transition duration-500" />
                 <div className="relative bg-card rounded-2xl shadow-xl border border-border overflow-hidden flex-1 flex flex-col">
                   <div className="bg-gradient-to-r from-secondary/5 via-secondary/10 to-transparent p-6 border-b border-border/60">
@@ -186,7 +258,30 @@ const Menu = () => {
                     </div>
                   </div>
 
-                  <div className="overflow-x-auto flex-1">
+                  {/* Mobile Cards (Dinner) - This section is now redundant as combined cards are used */}
+                  {/* <div className="md:hidden grid gap-3 p-4">
+                    {dinnerMenu.map((dayItem, index) => (
+                      <div key={index} className="bg-card/50 rounded-xl p-4 border border-border shadow-sm flex flex-col gap-3">
+                        <div className="flex justify-between items-center pb-2 border-b border-border/40">
+                          <span className="font-bold text-lg text-secondary">{dayItem.day}</span>
+                          <span className="text-xs font-medium bg-secondary/10 text-secondary px-2 py-0.5 rounded">Roti + Sabji</span>
+                        </div>
+                        <div className="space-y-2">
+                          <div>
+                            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide block mb-1">Sabji</span>
+                            <span className="text-sm font-medium">{dayItem.sabji}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm bg-orange-50 dark:bg-orange-950/30 px-3 py-2 rounded-lg border border-orange-100 dark:border-orange-900/50">
+                              <span className="text-orange-700 dark:text-orange-400 font-medium text-xs uppercase">Roti:</span>
+                              <span className="font-bold text-orange-800 dark:text-orange-300">{dayItem.roti}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div> */}
+
+                  {/* Desktop Table (Dinner) */}
+                  <div className="hidden md:flex flex-1 overflow-x-auto">
                     <table className="w-full text-left border-collapse h-full">
                       <thead>
                         <tr className="bg-muted/30 text-muted-foreground border-b border-border">
@@ -230,7 +325,24 @@ const Menu = () => {
                         <h2 className="text-xl font-bold text-green-700 dark:text-green-400">OPTIONAL ITEMS</h2>
                       </div>
                     </div>
-                    <div className="overflow-x-auto">
+                    {/* Mobile Cards (Optional) */}
+                    <div className="md:hidden grid gap-3 p-4">
+                      {optionalItems.map((optItem, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-muted/20 rounded-lg border border-border/50">
+                          <div className="flex flex-col">
+                            <span className="text-xs text-muted-foreground font-semibold uppercase">Sabji</span>
+                            <span className="text-sm font-medium">{optItem.sabji}</span>
+                          </div>
+                          <div className="flex flex-col items-end">
+                            <span className="text-xs text-muted-foreground font-semibold uppercase">Roti</span>
+                            <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded-md">{optItem.roti}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Desktop Table (Optional) */}
+                    <div className="hidden md:block overflow-x-auto">
                       <table className="w-full text-left border-collapse">
                         <thead>
                           <tr className="bg-muted/30 text-muted-foreground border-b border-border">
